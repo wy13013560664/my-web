@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="心动时刻 - AI智能匹配恋爱聊天APP，让每一次心动都有回响。基于AI算法的智能匹配，为单身青年打造真实、安全、高效的恋爱社交平台。">
+    <meta name="keywords" content="恋爱,交友,社交,匹配,聊天,AI,心动时刻">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="心动时刻 - AI智能匹配恋爱聊天APP">
+    <meta property="og:description" content="让每一次心动都有回响">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xindongshike.com">
+    
+    <title>心动时刻 - AI智能匹配恋爱聊天APP</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    
+    <!-- Hotjar Tracking -->
+    <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:YOUR_HOTJAR_ID,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+    </script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #FF6B9D;
+            --primary-dark: #E55A8B;
+            --primary-light: #FF8FB3;
+            --secondary-color: #FFB6C1;
+            --accent-color: #FFA07A;
+            --text-primary: #2D3748;
+            --text-secondary: #718096;
+            --text-light: #A0AEC0;
+            --bg-light: #FFF5F7;
+            --bg-white: #FFFFFF;
+            --border-color: #E2E8F0;
+            --success-color: #48BB78;
+            --warning-color: #F6AD55;
+            --error-color: #F56565;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            font-size: 1.75rem;
+        }
+        
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #FFF0F5 100%);
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, 50px) rotate(180deg); }
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-content .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-lg);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .phone-mockup {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            animation: phoneFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes phoneFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .phone-frame {
+            background: linear-gradient(135deg, #2D3748, #1A202C);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .phone-screen {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            aspect-ratio: 9/19;
+        }
+        
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 6rem 2rem;
+            background: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .section-header p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit-card {
+            background: var(--bg-light);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+        
+        .benefit-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+            color: white;
+        }
+        
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .benefit-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .benefit-card ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+        
+        .benefit-card ul li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .benefit-card ul li i {
+            color: var(--success-color);
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+        }
+        
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .step-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .step-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .step-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .testimonial-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 4rem;
+            color: var(--primary-light);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-content p {
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .author-info h4 {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .success-tag {
+            display: inline-block;
+            background: var(--success-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .urgency-box {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            display: inline-block;
+        }
+        
+        .urgency-box .countdown {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .urgency-box .spots {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .btn-white {
+            background: white;
+            color: var(--primary-color);
+            padding: 1.25rem 3rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-xl);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-white:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .price-info {
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .price-info .original-price {
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 2rem;
+            background: var(--bg-light);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: white;
+            border: none;
+            text-align: left;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: var(--primary-color);
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            max-height: 500px;
+        }
+        
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        /* Trust Section */
+        .trust {
+            padding: 4rem 2rem;
+            background: white;
+            text-align: center;
+        }
+        
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .trust-badge i {
+            font-size: 1.5rem;
+            color: var(--success-color);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1A202C;
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .footer-copyright {
+            opacity: 0.6;
+            font-size: 0.875rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-xl);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlideIn 0.3s ease;
+        }
+        
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+        }
+        
+        .form-group .input-hint {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 1rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        /* Success Message */
+        .success-message {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--success-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            color: white;
+        }
+        
+        .success-message h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .success-message p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .reservation-number {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+            
+            .cta-group {
+                justify-content: center;
+            }
+            
+            .phone-mockup {
+                max-width: 280px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .benefits-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-heart"></i>
+                心动时刻
+            </div>
+            <a href="#cta" class="nav-cta" onclick="trackEvent('nav_cta_click')">
+                立即预约
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>AI智能匹配，让每一次心动都有回响</h1>
+                <p class="subtitle">
+                    告别无效匹配，AI精准推荐志同道合的TA<br>
+                    智能聊天助手，让每次对话都自然流畅
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="userCount">10,000+</span>
+                        <span class="stat-label">用户已预约</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">92%</span>
+                        <span class="stat-label">匹配满意度</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3天</span>
+                        <span class="stat-label">平均建立对话</span>
+                    </div>
+                </div>
+                
+                <div class="cta-group">
+                    <button class="btn-primary" onclick="openModal(); trackEvent('hero_cta_click')">
+                        <i class="fas fa-heart"></i>
+                        立即预约，享早鸟价
+                    </button>
+                    <a href="#benefits" class="btn-secondary">
+                        <i class="fas fa-info-circle"></i>
+                        了解更多
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-image">
+                <div class="phone-mockup">
+                    <div class="phone-frame">
+                        <div class="phone-screen">
+                            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=400&h=800&fit=crop" alt="心动时刻APP界面">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2>为什么选择心动时刻？</h2>
+                <p>三大核心优势，让您的恋爱之旅更高效、更真实、更有趣</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card" onclick="trackEvent('benefit_card_click', {card: 'ai_match'})">
+                    <div class="benefit-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>AI智能匹配，精准推荐</h3>
+                    <p>基于兴趣、性格、价值观的多维度匹配算法，让每一次推荐都更有可能</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 匹配准确率提升300%</li>
+                        <li><i class="fas fa-check"></i> 每日智能推荐3-5位高匹配度用户</li>
+                        <li><i class="fas fa-check"></i> AI持续学习您的偏好</li>
+                    </ul>
+                </div>
+                
+                <div class="benefit-card" onclick="trackEvent('benefit_card_click', {card: 'real_social'})">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>真人认证，安全可靠</h3>
+                    <p>严格真人认证机制，智能反骚扰系统，为女性用户打造安心的社交环境</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 100%真人认证</li>
+                        <li><i class="fas fa-check"></i> 智能反骚扰系统</li>
+                        <li><i class="fas fa-check"></i> 隐私保护机制</li>
+                    </ul>
+                </div>
+                
+                <div class="benefit-card" onclick="trackEvent('benefit_card_click', {card: 'deep_interact'})">
+                    <div class="benefit-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>深度互动，快速破冰</h3>
+                    <p>AI聊天助手提供话题建议，破冰游戏拉近距离，告别尬聊尴尬</p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 智能话题推荐</li>
+                        <li><i class="fas fa-check"></i> 破冰成功率提升200%</li>
+                        <li><i class="fas fa-check"></i> 多种互动方式</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>三步开启心动之旅</h2>
+                <p>简单三步，遇见对的人</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>完善资料</h3>
+                    <p>填写基本信息、兴趣爱好、择偶标准，AI自动生成个人标签</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>智能匹配</h3>
+                    <p>AI分析您的需求，精准推荐合适对象，查看匹配度和共同兴趣</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>开启对话</h3>
+                    <p>双方心动即可匹配成功，AI聊天助手助力，自然开启心动对话</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>真实用户见证</h2>
+                <p>听听他们怎么说</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>之前用其他软件总是匹配到不合适的人，浪费时间又心累。心动时刻的AI匹配真的很准，推荐的第一个男生就聊得很投机，现在已经在一起3个月了！</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">小美</div>
+                        <div class="author-info">
+                            <h4>小美</h4>
+                            <p>26岁 · 上海 · 产品经理</p>
+                            <span class="success-tag">已成功匹配</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>作为社恐，最怕不知道聊什么。AI聊天助手太贴心了，话题建议都很自然，现在聊天完全不紧张了。强烈推荐给和我一样的朋友！</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">小明</div>
+                        <div class="author-info">
+                            <h4>小明</h4>
+                            <p>28岁 · 北京 · 程序员</p>
+                            <span class="success-tag">已成功匹配</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>作为女生，最怕遇到骚扰和虚假信息。这个APP的视频认证让我很放心，而且智能反骚扰系统真的很有效，体验感很好！</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">晓晓</div>
+                        <div class="author-info">
+                            <h4>晓晓</h4>
+                            <p>24岁 · 深圳 · 设计师</p>
+                            <span class="success-tag">已成功匹配</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="cta-content">
+            <h2>立即预约，开启心动之旅</h2>
+            <p>前1000名预约用户享早鸟价，名额有限，先到先得</p>
+            
+            <div class="urgency-box">
+                <div class="countdown" id="countdown">
+                    <i class="fas fa-clock"></i> 
+                    限时优惠倒计时：02天 15小时 32分钟
+                </div>
+                <div class="spots">
+                    仅剩 <strong id="spotsLeft">237</strong> 个早鸟名额
+                </div>
+            </div>
+            
+            <button class="btn-white" onclick="openModal(); trackEvent('cta_button_click')">
+                <i class="fas fa-heart"></i>
+                立即预约 ¥9.9/月
+            </button>
+            
+            <div class="price-info">
+                早鸟价 ¥9.9/月 <span class="original-price">原价 ¥29.9/月</span><br>
+                7天无理由退款 · 支持微信/支付宝
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="faq-container">
+            <div class="section-header">
+                <h2>常见问题</h2>
+                <p>您可能想了解的问题</p>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this); trackEvent('faq_click', {question: 'when_launch'})">
+                    <span>产品什么时候上线？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        预计2026年3月正式上线。预约用户将优先获得内测资格，我们会通过短信/邮件通知您上线时间。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this); trackEvent('faq_click', {question: 'price'})">
+                    <span>早鸟价有什么优惠？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        前1000名预约用户可享¥9.9/月早鸟价（原价¥29.9/月），且永久锁定该价格。早鸟价用户还将获得：每日更多推荐次数、查看谁喜欢了我等VIP特权。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this); trackEvent('faq_click', {question: 'refund'})">
+                    <span>如果不满意可以退款吗？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        支持7天无理由退款。产品上线后7天内，如不满意可申请全额退款，无需任何理由。退款流程简单，1-3个工作日到账。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this); trackEvent('faq_click', {question: 'real_user'})">
+                    <span>如何保证用户真实性？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        我们采用多重真人认证机制，包括手机号验证、真人照片认证、视频认证等。所有用户必须通过认证才能使用核心功能，确保100%真人社交。同时，我们还有智能反骚扰系统，24小时监控异常行为。
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this); trackEvent('faq_click', {question: 'privacy'})">
+                    <span>我的隐私安全吗？</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        我们严格遵守《个人信息保护法》，所有数据采用银行级加密技术存储。您的个人信息严格保密，不会泄露给第三方。您还可以自由控制在线状态、距离信息等隐私设置，安心交友。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust">
+        <div class="container">
+            <h3 style="margin-bottom: 1rem; color: var(--text-primary);">信任保障</h3>
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>7天无理由退款</span>
+                </div>
+                <div class="trust-badge">
+                    <i class="fas fa-lock"></i>
+                    <span>隐私保护承诺</span>
+                </div>
+                <div class="trust-badge">
+                    <i class="fas fa-headset"></i>
+                    <span>24小时客服支持</span>
+                </div>
+                <div class="trust-badge">
+                    <i class="fas fa-check-circle"></i>
+                    <span>官方认证标识</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#" onclick="trackEvent('footer_click', {link: 'about'})">关于我们</a>
+            <a href="#" onclick="trackEvent('footer_click', {link: 'privacy'})">隐私政策</a>
+            <a href="#" onclick="trackEvent('footer_click', {link: 'terms'})">用户协议</a>
+            <a href="#" onclick="trackEvent('footer_click', {link: 'contact'})">联系我们</a>
+        </div>
+        <div class="footer-copyright">
+            © 2026 心动时刻. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Reservation Modal -->
+    <div class="modal" id="reservationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>立即预约</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="modal-body" id="modalBody">
+                <form id="reservationForm" onsubmit="submitReservation(event)">
+                    <div class="form-group">
+                        <label for="phone">手机号 *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="请输入手机号" required 
+                               pattern="^1[3-9]\d{9}$" maxlength="11">
+                        <div class="input-hint">用于接收预约确认短信和上线通知</div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nickname">昵称 *</label>
+                            <input type="text" id="nickname" name="nickname" placeholder="您的昵称" 
+                                   required minlength="2" maxlength="12">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gender">性别 *</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">请选择</option>
+                                <option value="male">男</option>
+                                <option value="female">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">年龄段 *</label>
+                            <select id="age" name="age" required>
+                                <option value="">请选择</option>
+                                <option value="18-22">18-22岁</option>
+                                <option value="23-28">23-28岁</option>
+                                <option value="29-35">29-35岁</option>
+                                <option value="35+">35岁以上</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="plan">套餐选择 *</label>
+                            <select id="plan" name="plan" required>
+                                <option value="">请选择</option>
+                                <option value="monthly">月卡 ¥9.9/月</option>
+                                <option value="quarterly">季卡 ¥24.9/季（省¥15）</option>
+                                <option value="yearly">年卡 ¥79.9/年（省¥280）</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        立即预约
+                    </button>
+                    
+                    <div class="form-footer">
+                        点击"立即预约"即表示同意<br>
+                        <a href="#">用户协议</a> 和 <a href="#">隐私政策</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('reservationModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            trackEvent('modal_open');
+        }
+
+        function closeModal() {
+            document.getElementById('reservationModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('reservationModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // FAQ toggle
+        function toggleFAQ(button) {
+            const answer = button.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('active'));
+            document.querySelectorAll('.faq-question').forEach(q => q.classList.remove('active'));
+            
+            // Toggle current FAQ
+            if (!isActive) {
+                answer.classList.add('active');
+                button.classList.add('active');
+            }
+        }
+
+        // Form submission
+        async function submitReservation(event) {
+            event.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner"></span> 提交中...';
+            
+            // Collect form data
+            const formData = {
+                phone: document.getElementById('phone').value,
+                nickname: document.getElementById('nickname').value,
+                gender: document.getElementById('gender').value,
+                age: document.getElementById('age').value,
+                plan: document.getElementById('plan').value,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                referrer: document.referrer,
+                utm_source: getUrlParam('utm_source'),
+                utm_medium: getUrlParam('utm_medium'),
+                utm_campaign: getUrlParam('utm_campaign')
+            };
+            
+            try {
+                // Simulate API call (replace with actual API endpoint)
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Generate reservation number
+                const reservationNumber = 'XD' + Date.now().toString().slice(-8);
+                
+                // Track conversion
+                trackEvent('reservation_success', {
+                    plan: formData.plan,
+                    age: formData.age,
+                    gender: formData.gender
+                });
+                
+                // Show success message
+                showSuccessMessage(reservationNumber, formData);
+                
+                // Store in localStorage
+                const reservations = JSON.parse(localStorage.getItem('reservations') || '[]');
+                reservations.push({...formData, reservationNumber});
+                localStorage.setItem('reservations', JSON.stringify(reservations));
+                
+                // Update spots left
+                updateSpotsLeft();
+                
+            } catch (error) {
+                console.error('Submission error:', error);
+                alert('提交失败，请稍后重试');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        }
+
+        // Show success message
+        function showSuccessMessage(reservationNumber, formData) {
+            const modalBody = document.getElementById('modalBody');
+            const planNames = {
+                'monthly': '月卡 ¥9.9/月',
+                'quarterly': '季卡 ¥24.9/季',
+                'yearly': '年卡 ¥79.9/年'
+            };
+            
+            modalBody.innerHTML = `
+                <div class="success-message">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3>预约成功！</h3>
+                    <p>感谢您的信任，我们会尽快通知您产品上线</p>
+                    <div class="reservation-number">${reservationNumber}</div>
+                    <p style="margin-bottom: 1rem;">
+                        <strong>套餐：</strong>${planNames[formData.plan]}<br>
+                        <strong>手机号：</strong>${formData.phone}
+                    </p>
+                    <p style="font-size: 0.875rem; color: var(--text-secondary);">
+                        我们会在产品上线前通过短信通知您<br>
+                        请保持手机畅通
+                    </p>
+                    <button class="btn-primary" style="margin-top: 1.5rem;" onclick="closeModal()">
+                        完成
+                    </button>
+                </div>
+            `;
+        }
+
+        // Update spots left
+        function updateSpotsLeft() {
+            const spotsElement = document.getElementById('spotsLeft');
+            const currentSpots = parseInt(spotsElement.textContent);
+            if (currentSpots > 0) {
+                spotsElement.textContent = currentSpots - 1;
+            }
+        }
+
+        // Get URL parameters
+        function getUrlParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param) || '';
+        }
+
+        // Track events (Google Analytics + Custom)
+        function trackEvent(eventName, eventParams = {}) {
+            // Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', eventName, eventParams);
+            }
+            
+            // Console log for debugging
+            console.log('Event tracked:', eventName, eventParams);
+            
+            // Custom analytics (send to your backend)
+            // fetch('/api/analytics', {
+            //     method: 'POST',
+            //     headers: {'Content-Type': 'application/json'},
+            //     body: JSON.stringify({eventName, eventParams, timestamp: new Date().toISOString()})
+            // });
+        }
+
+        // Countdown timer
+        function updateCountdown() {
+            // Set end date (2 days from now for demo)
+            const endDate = new Date();
+            endDate.setDate(endDate.getDate() + 2);
+            endDate.setHours(23, 59, 59, 999);
+            
+            const now = new Date();
+            const diff = endDate - now;
+            
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                document.getElementById('countdown').innerHTML = `
+                    <i class="fas fa-clock"></i> 
+                    限时优惠倒计时：${String(days).padStart(2, '0')}天 ${String(hours).padStart(2, '0')}小时 ${String(minutes).padStart(2, '0')}分钟
+                `;
+            }
+        }
+
+        // Update countdown every minute
+        setInterval(updateCountdown, 60000);
+        updateCountdown();
+
+        // Track page view
+        window.addEventListener('load', function() {
+            trackEvent('page_view', {
+                page: 'landing_page',
+                referrer: document.referrer,
+                utm_source: getUrlParam('utm_source'),
+                utm_medium: getUrlParam('utm_medium'),
+                utm_campaign: getUrlParam('utm_campaign')
+            });
+        });
+
+        // Track scroll depth
+        let maxScroll = 0;
+        window.addEventListener('scroll', function() {
+            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            
+            if (scrollPercent > maxScroll) {
+                maxScroll = scrollPercent;
+                
+                // Track scroll milestones
+                if ([25, 50, 75, 100].includes(scrollPercent)) {
+                    trackEvent('scroll_depth', {depth: scrollPercent});
+                }
+            }
+        });
+
+        // Track time on page
+        let timeOnPage = 0;
+        setInterval(function() {
+            timeOnPage += 10;
+            if ([30, 60, 120, 300].includes(timeOnPage)) {
+                trackEvent('time_on_page', {seconds: timeOnPage});
+            }
+        }, 10000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "xindong-landing-page",
+  "version": "1.0.0",
+  "description": "心动时刻Landing Page",
+  "scripts": {
+    "start": "npx serve",
+    "deploy": "npx vercel --prod"
+  },
+  "keywords": ["landing-page", "dating", "app"],
+  "author": "心动时刻团队",
+  "license": "MIT"
+}
